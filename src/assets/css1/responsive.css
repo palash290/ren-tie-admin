@@ -1,0 +1,104 @@
+
+@media screen and (max-width:1199px){
+    .ct_cloud_images img{
+        max-width: 300px !important;
+        width: 100%;
+    }
+    .ct_cloud_images img:nth-child(3){
+        max-width: 200px !important;
+    }
+}
+@media screen and (max-width:991px){
+    .ct_nav_menu ul{
+        position: fixed;
+        right: -100%;
+        max-width: 300px;
+        padding: 70px 30px;
+        background: #f65e53;
+        flex-direction: column;
+        gap: 30px;
+        height: 100vh;
+        align-items: flex-start;
+        top: 0px;
+        width: 100%;
+        transition: 0.6s linear all;
+        z-index: 99999999;
+    }
+    .ct_nav_menu ul.ct_show_menu{
+        right: 0px;
+    }
+    .ct_menu_bar,.ct_close_menu{
+        display: block;
+    }
+    .ct_close_menu{
+        font-size: 24px ;
+    }
+    .ct_feature_img{
+        margin-bottom: 100px;
+    }
+    .ct_start_now_div{
+        max-width: 200px;
+        max-height: 200px;
+    }
+    .ct_feature_img img {
+        object-fit: cover;
+        width: calc(100% - 60px);
+    }
+    .ct_start_now_div {
+       
+        left: calc(100% - 193px);
+    }
+    figure.ct_how_works_card {
+      
+        padding: 20px;
+    }
+    .ct_how_works_img span {
+       
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+   
+}
+
+@media screen and (max-width:767px){
+    .ct_cloud_images img{
+        max-width: 200px !important;
+        width: 100%;
+    }
+    .ct_cloud_images img:nth-child(3){
+        max-width: 100px !important;
+    }
+    .ct_banner_download_btn a img {
+        height: 74px;
+        object-fit: contain;
+        width: 170px;
+    }
+    .ct_mt_120 {
+        margin-top: 50px;
+    }
+    .ct_fs_50 {
+        font-size: 35px;
+        line-height: 45px;
+    }
+    .ct_fs_24 {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .ct_fs_18{
+        font-size: 16px;
+        line-height: 26px;
+    }
+    .ct_hero_section {
+        background-color: var(--light_red);
+        height: 500px;
+      
+    }
+    .ct_fs_44 {
+        font-size: 35px;
+        line-height: 36px;
+    }
+    br{
+        display: none;
+    }
+}

@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- app.component.html -->
+<div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+    <h2 class="ct_h2">Privacy & Policy</h2>
+</div>
+<!-- <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="editorData"></ckeditor> -->
+<ngx-editor-menu  [editor]="editor" [toolbar]="toolbar" ></ngx-editor-menu>
+<ngx-editor [editor]="editor" [(ngModel)]="editorData"></ngx-editor>
+
+<!-- <textarea name="" id="" [(ngModel)]="editorData" rows="7" style="width: 100%;"></textarea> -->
+<button class="ct_custom_btn py-2 px-3 w-auto mx-auto d-block mt-4" (click)="onUpdate()">Save</button>
+        </div>
+    </div>
+
+</div>

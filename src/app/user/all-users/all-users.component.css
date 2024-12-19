@@ -1,0 +1,148 @@
+/* src/app/login/login.component.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .card {
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .card-body {
+    padding: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    border-radius: 5px;
+  }
+  
+  .btn-primary {
+    border-radius: 5px;
+  }
+  
+  .text-danger {
+    font-size: 0.875rem; /* 14px */
+  }
+  
+
+  .active {
+    background-color: #ebdede; /* Example highlight color */
+    color: #fff; /* Example text color */
+    border-radius: 0px;
+}
+
+.ct_login_custom_tab{
+  justify-content: center;
+  border-bottom: 0px;
+}
+
+.ct_login_custom_tab{
+  gap: 10px;
+}
+.ct_login_custom_tab li.nav-item.active {
+  background-color: #fe2f7a;
+
+}
+.ct_login_custom_tab li.nav-item a{
+color: #000;
+}
+.ct_login_custom_tab li.nav-item.active  a{
+  color: #fff;
+}
+.ct_login_custom_tab li.nav-item{
+  background-color: #d8d8d8;
+  width: 100px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.ct_login_right_form {
+  background-color: #fff;
+  box-shadow: 0px 0px 25px rgba(0,0,0,0.09);
+  padding: 30px 15px;
+  border-top: 3px solid #e65f2b;
+  margin-top: 25px;
+}
+
+.swal-button--orange {
+  background-color: orange !important;
+  color: white !important;
+}
+
+.swal-button--red {
+  background-color: red !important;
+  color: white !important;
+}
+
+
+.ct_multiple_img_flex{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.ct_multiple_img_flex img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.ct_multiple_img_dlt {
+  width: 18px;
+  height: 18px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  outline: none;
+  border: 0px;
+  background-color: var(--red);
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  font-size: 10px;
+}
+.ct_delete_btn{
+  background-color: #ff0000;
+}
+.ct_flex_1{
+  flex: 1;
+}
+
+#ct_event_img7[type=file]::file-selector-button:hover {
+  background: var(--red);
+}
+#ct_event_img7[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: var(--red);
+  padding: 6px 5px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ct_price_tag_position{
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+

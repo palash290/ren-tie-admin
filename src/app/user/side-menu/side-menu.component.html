@@ -1,0 +1,33 @@
+<div class="ct_sidebar">
+    <div class="ct_close_btn" (click)="toggleMenu()">
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+    <div class="ct_logo" routerLink="/user/main/all-users" style="cursor: pointer;">
+        <img src="assets/img/rlogo.png" alt="">
+
+    </div>
+    <ul class="mb-0 ps-0 ct_menu_links mt-5">
+        <li [ngClass]="{ 'active': isActive('user/main/all-users')}"><a routerLink="/user/main/all-users"><i
+                    class="fa-solid fa-house me-2 "></i>All Users</a></li>
+        <!-- <li [ngClass]="{ 'active': isActive('user/main/notification')}"><a routerLink="/user/main/notification"><i class="fa-solid fa-bell me-2"></i>Notifications</a></li> -->
+        <li [ngClass]="{ 'active': isActive('user/main/bid')}"><a routerLink="/user/main/bid"><i
+                    class="fa-solid fa-money-check-dollar me-2"></i>Bid</a></li>
+        <li [ngClass]="{ 'active': isActive('user/main/transaction-history')}"><a
+                routerLink="/user/main/transaction-history"><i class="fa-solid fa-credit-card me-2"></i>Transaction
+                History</a></li>
+
+                <li [ngClass]="{ 'active': isActive('user/main/interest')}"><a routerLink="/user/main/interest"><i
+                    class="fa-solid fa-hashtag me-2"></i>Manage Interest</a></li>
+                    
+
+        <li [ngClass]="{ 'active': isActive('user/main/subscription')}"><a routerLink="/user/main/subscription"><i
+                    class="fa-solid fa-clock-rotate-left me-2"></i>Subscription History</a></li>
+
+        <li [ngClass]="{ 'active': isActive('user/main/pandp')}"><a routerLink="/user/main/pandp"><i
+                    class="fa-solid  fa-shield-halved me-2"></i>Privacy & Policy</a></li>
+        <li [ngClass]="{ 'active': isActive('user/main/terms-condition')}"><a routerLink="/user/main/terms-condition"><i
+                    class="fa-solid fa-user-lock me-2"></i>Terms & Conditions</a></li>
+        
+    </ul>
+
+</div>

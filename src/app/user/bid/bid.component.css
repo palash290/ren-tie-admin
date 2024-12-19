@@ -1,0 +1,25 @@
+.ct_badge{
+    padding: 5px 10px;
+    border-radius: 100px;
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    text-align: center;
+    width: fit-content;
+
+}
+.ct_pending_clr{
+    background-color: orange;
+}
+.ct_accept_clr{
+    background-color: #1db958;
+}
+.ct_rejected_clr{
+    background-color: #ff0000;
+}
+
+.ct_img_40{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}

@@ -1,0 +1,19 @@
+.ct_multiple_img_flex{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .ct_multiple_img_flex img {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  .ct_view_user_img_bg{
+    background-color: #fff;
+    padding: 30px 15px;
+    border-radius: 10px;
+
+
+  }

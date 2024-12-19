@@ -1,0 +1,218 @@
+<div class="ct_middle_cnt">
+
+    <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+        <h2 class="ct_h2">Manage Interest</h2>
+
+        <!-- <button class="ct_custom_btn py-2 px-4 w-auto" data-bs-toggle="modal" data-bs-target="#ct_add_b">
+            <i class="fa-solid fa-plus"></i> Add Interest
+        </button> -->
+
+        <div class="">
+            <div class="d-flex align-items-center justify-content-between ct_responsive_wrap">
+
+                <div class="position-relative ct_search_input">
+                    <input type="text" class="form-control ct_flex_1" placeholder="Search" [(ngModel)]="searchQuery">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="mb-5">
+        <div class="table-responsive">
+            <table class="table ct_custom_table">
+                <thead>
+                    <tr>
+                        <th>S No.</th>
+                        <th>Icon</th>
+                        <th>Interest</th>
+                        <!-- <th>Started At</th>
+                        <th>Expiry Date</th>
+                        <th>Status</th>
+                        <th class="text-end">Action</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let row of data | filter:searchQuery | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                        <td>{{(p - 1) * 10 + i + 1}}</td>
+                        <td>
+                            <div class="ct_event_img">
+                                <img [src]="row.image ? row.image : 'assets/img/np_pro.png'" alt="img"
+                                    class="ct_img_40">
+                            </div>
+                        </td>
+
+                        <td>{{row.intrest_name}}</td>
+                        <!-- <td>{{row.start_from | date:'dd-mm-yyyy'}}</td>
+                        <td>{{row.expire_on | date:'dd-mm-yyyy'}}</td>
+                        <td>
+                            <ng-container *ngIf="row.status == 0">
+                                <span class="ct_badge ct_pending_clr">Expired</span>
+                            </ng-container>
+                            <ng-container *ngIf="row.status == 1"><span
+                                    class="ct_badge ct_accept_clr">Active</span></ng-container>
+                          
+                        </td> -->
+
+                        <!-- <td class="text-end">
+                            <div class="d-flex align-items-center gap-3 justify-content-end">
+                                <i class="fa-solid fa-pen-to-square" style="cursor: pointer" data-bs-toggle="modal"
+                                    data-bs-target="#ct_edit_b" (click)="patchUpdate(row)"></i>
+                                <i class="fa-solid fa-trash-can text-danger" style="cursor: pointer"
+                                    (click)="deleteField(row.id)"></i>
+                            </div>
+                        </td> -->
+
+                    </tr>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <div *ngIf="(!data || (data | filter: searchQuery)?.length === 0)" class="no-item-found">
+                                <p class="text-center my-5"> No results found</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                <!-- <div *ngIf="(data?.length == 0)" class="no-item-found">
+                      No results found
+                  </div> -->
+            </table>
+        </div>
+        <pagination-controls class="ct_pagination_div" *ngIf="!(data?.length == 0)"
+            (pageChange)="p = $event"></pagination-controls>
+    </section>
+
+</div>
+
+
+
+
+
+
+
+
+<!-- Add both -->
+<div class="modal fade" id="ct_add_b" tabindex="-1" aria-labelledby="ct_add_offerLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-0 pb-5">
+                <div class="ct_event_modal">
+                    <h2 class="text-center mb-5 ct_h2">Add Interest</h2>
+                    <form [formGroup]="interestForm">
+
+                        <!-- <div class="ct_formField mb-3">
+                            <label for="" class="mb-2 ct_fw_600">Icon</label>
+                            <label for="ct_event_img" class="w-100">
+                                <input type="file" id="ct_event_img" formControlName="profile_images"
+                                    (change)="onFileSelect($event, 'profile_images')" />
+                            </label>
+                        </div> -->
+
+                        <div>
+                            <label for="icon">Select Icon:</label>
+                            <input type="text" [iconPicker]="selectedIcon" (iconPickerSelect)="onIconSelect($event)" />
+                        </div>
+
+                        <!-- Display the selected icon -->
+                        <!-- <div *ngIf="selectedIcon">
+                            <p>Selected Icon:</p>
+                            <i [class]="selectedIcon" style="font-size: 24px;"></i>
+                        </div> -->
+
+                        <!-- Hidden canvas to draw icon -->
+                        <!-- <canvas #iconCanvas width="100" height="100" style="border: 1px solid black;"></canvas> -->
+
+
+
+                        <!-- <div>
+                            <canvas #iconCanvas style="display: none;"></canvas>
+                            <button (click)="convertIconToImage()">Convert Icon to Image</button>
+                            <div *ngIf="convertedImage">
+                                <h3>Converted Image:</h3>
+                                <img [src]="convertedImage" alt="Converted Icon" />
+                            </div>
+                        </div> -->
+
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Interest</label>
+                            <input type="text" required="" formControlName="interest" placeholder="Enter Interest"
+                                maxlength="30" />
+                            <div *ngIf="interestForm.controls['interest'].invalid && interestForm.controls['interest'].touched"
+                                class="error-message">
+                                <div *ngIf="interestForm.controls['interest'].errors?.['required']">This field is
+                                    required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="ct_custom_btn mt-5 px-4 w-auto mx-auto d-block"
+                            (click)="addQuestion()">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="spinner-border me-2" role="status" *ngIf="btnLoader">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <span *ngIf="!btnLoader">Add Interest</span>
+                            </div>
+                        </button>
+                        <button hidden type="button" class="btn btn-secondary" #closeModal
+                            data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit both -->
+<div class="modal fade" id="ct_edit_b" tabindex="-1" aria-labelledby="ct_edit_offerLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-0 pb-5">
+                <div class="ct_event_modal">
+                    <h2 class="text-center mb-5 ct_h2">Edit Interest</h2>
+                    <form [formGroup]="editForm">
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Interest</label>
+                            <input type="text" required="" formControlName="interest" placeholder="Enter Interest"
+                                maxlength="30" />
+
+                            <div *ngIf="editForm.controls['interest'].invalid && editForm.controls['interest'].touched"
+                                class="error-message">
+                                <div *ngIf="editForm.controls['interest'].errors?.['required']">This field is
+                                    required.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button type="button" class="ct_custom_btn mt-5 px-4 w-auto mx-auto d-block">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="spinner-border me-2" role="status" *ngIf="btnEditLoader">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <span *ngIf="!btnEditLoader">Update</span>
+                            </div>
+                        </button>
+                        <button hidden type="button" class="btn btn-secondary" #closeModal1
+                            data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

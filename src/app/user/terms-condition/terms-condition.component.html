@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+                <h2 class="ct_h2">Terms & Conditions</h2>
+            </div>
+            <!-- <textarea name="" id="" [(ngModel)]="editorData" rows="7" style="width: 100%;"></textarea> -->
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+            <ngx-editor [editor]="editor" [(ngModel)]="editorData"></ngx-editor>
+            <button class="ct_custom_btn py-2 px-3 w-auto mt-4 mx-auto d-block" (click)="onUpdate()">Save</button>
+        </div>
+
+    </div>
+
+</div>

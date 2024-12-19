@@ -1,0 +1,152 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <div class="modal-body pt-0 pb-5">
+                <div class="ct_event_modal ct_view_user_img_bg">
+                    <h2 class="text-center mb-5 ct_h2">View User</h2>
+                    <form [formGroup]="editForm">
+            
+                        <div class="ct_formField mb-3">
+                            <label for="ct_event_img" class="w-100">
+            
+                                <div class="ct_edt_img" *ngIf="user_profile_images == null">
+                                    No image found.
+                                </div>
+                                <!-- <input type="file" class="d-none" id="ct_event_img"> -->
+                                <div class="ct_edt_img text-center" *ngIf="user_profile_images !== null">
+                                    <img id="blah" src="#" alt="Uploaded Image" [src]="user_profile_images" class="w-auto mx-autod-block">
+                                </div>
+                            </label>
+                        </div>
+            
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Name</label>
+                            <input type="text" formControlName="fullName" />
+                        </div>
+            
+                        <div class="ct_formField mb-3">
+                            <label for="" class="mb-2 ct_fw_600">DOB</label>
+                            <input type="text" formControlName="dob" />
+                        </div>
+            
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Address</label>
+                            <input type="text" formControlName="address" />
+                        </div>
+            
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Phone Number</label>
+                            <input type="text" formControlName="mobileNumber" maxlength="14" />
+                        </div>
+            
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Bio</label>
+                            <textarea type="text" formControlName="bio" maxlength="250"></textarea>
+                        </div>
+            
+                        <div class="form-floating ct_formField ct_input mb-3">
+                            <select class="form-select form-control" id="floatingSelect" aria-label="Floating label select example"
+                                formControlName="gender">
+                                <option value="0" disabled>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="lesbian">Lesbian</option>
+                                <option value="gay">Gay</option>
+                                <option value="transgender">Transgender</option>
+                                <option value="queer">Queer</option>
+                            </select>
+                            <label for="floatingSelect">Gender</label>
+                        </div>
+            
+                        <div class="ct_formField mb-3" >
+                            <label for="" class="mb-2 ct_fw_600">Current Balance</label>
+                            <span>(€)</span>
+                            <input type="text" [value]="current_amount ? current_amount : 0" disabled>
+                        </div>
+            
+            
+            
+                        <div class="image-manager">
+                            <!-- <input type="file" (change)="onFileSelected($event)" multiple> -->
+                            <!-- <div class="ct_formField mb-3">
+                                <label for="ct_event_img" class="w-100">
+                                    <input type="file" id="ct_event_img" formControlName="images" multiple
+                                        (change)="onFileSelectEdit($event)" />
+                                </label>
+                            </div> -->
+            
+                            <div class="image-list ct_multiple_img_flex" *ngIf="imageUrls">
+                                <div class="position-relative" *ngFor="let image of imageUrls; let i = index">
+                                    <img [src]="image" alt="Image">
+                                </div>
+                            </div>
+            
+                        </div>
+                    </form>
+                </div>
+            
+            
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 
+<div class="ct_middle_cnt">
+    <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+        <h2 class="ct_h2">Transaction Details</h2>
+    </div>
+    <section class="mb-5">
+
+        <div class="table-responsive">
+            <table class="table ct_custom_table">
+                <thead>
+                    <tr>
+                        <th>S No.</th>
+                        <th>Transaction Type</th>
+                        <th>Total Amount</th>
+                        <th>Admin Commission(%)</th>
+                        <th>Wallet Amount</th>
+                        <th>Date & Time </th>
+                   
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of data; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{row.Transcation_type}}</td>
+                        <td>{{row.total_amount}}</td>
+                        <td>{{row.adminComminissionPerctage}}</td>
+                        <td>{{row.actual_amount}}</td>
+                        <td>{{row.createdAt | date:'M/d/yy, h:mm a'}}</td>
+                       
+                       
+                        <td>
+                            <ng-container *ngIf="row.payment_status == 0"> <span
+                                    class="ct_badge ct_pending_clr">Pending</span></ng-container>
+                            <ng-container *ngIf="row.payment_status == 1"><span
+                                    class="ct_badge ct_accept_clr">Success</span></ng-container>
+                            <ng-container *ngIf="row.payment_status == 2"><span
+                                    class="ct_badge ct_rejected_clr">Rejected</span></ng-container>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            <div *ngIf="(data?.length == 0)" class="no-item-found">
+                                <p class="text-center my-5"> No results found</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+                
+            </table>
+        </div>
+
+    </section>
+
+</div> -->

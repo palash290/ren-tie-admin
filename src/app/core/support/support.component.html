@@ -1,0 +1,75 @@
+<header>
+      <div class="ct_logo">
+            <img src="assets/img/rlogo.png" alt="">
+      </div>
+</header>
+<section class="py-5">
+      <div class="container">
+            <div class="row">
+                  <div class="col-md-12 mb-4">
+                        <h4 class="ct_fs_28 ct_fw_600">You can find us here</h4>
+                        <p>Find help for your queries here:
+                        </p>
+                  </div>
+
+            </div>
+            <div class="row">
+                  <div class="col-lg-8 col-md-7 mb-4 mb-md-0">
+                        <div class="ct_left_cnt">
+                              <form [formGroup]="supportForm" (ngSubmit)="onSubmit()">
+                                    <div class="form-group mb-4">
+                                          <label for="" class="ct_fw_600 mb-2">Name</label>
+                                          <input type="text" class="form-control ct_input" placeholder="Enter Name"
+                                                formControlName="name">
+                                          <div *ngIf="supportForm.controls['name'].invalid && supportForm.controls['name'].touched"
+                                                class="error-message">
+                                                <div *ngIf="supportForm.controls['name'].errors?.['required']">Name is
+                                                      required.</div>
+                                          </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                          <label for="" class="ct_fw_600 mb-2">Email</label>
+                                          <input type="email" class="form-control ct_input" placeholder="Enter Email"
+                                                formControlName="email">
+                                          <div *ngIf="supportForm.controls['email'].invalid && supportForm.controls['email'].touched"
+                                                class="error-message">
+                                                <div *ngIf="supportForm.controls['email'].errors?.['required']">Email is
+                                                      required.</div>
+                                                <div
+                                                      *ngIf="supportForm.controls['email'].errors?.['email'] && !supportForm.controls['email'].errors?.['required']">
+                                                      Invalid email format.</div>
+                                          </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                          <label for="" class="ct_fw_600 mb-2">Comment</label>
+                                          <textarea type="text" class="form-control ct_input h-auto" rows="4"
+                                                placeholder="Leave a Comment..." formControlName="comment"></textarea>
+                                    </div>
+                                    <button type="submit" class="ct_submit_btn">Submit</button>
+                              </form>
+                        </div>
+                  </div>
+                  <div class="col-lg-4 mb-4 col-md-5 mb-md-0">
+                        <div class="ct_right_cnt">
+                              <ul>
+                                    <li>
+                                          <h4 class="mb-3 ct_fs_20 ct_fw_600">Email Address</h4>
+                                          <a href="mailto:support.rentie@gmail.com"><i
+                                                      class="fa-solid fa-envelope me-2"></i>mailto:support.rentie&#64;gmail.com</a>
+                                    </li>
+                                    <li>
+                                          <h4 class="mb-3 ct_fs_20 ct_fw_600">Phone Number</h4>
+                                          <a href="tel:3478251042"><i class="fa-solid fa-phone me-2"></i>3478251042</a>
+                                    </li>
+                              </ul>
+                        </div>
+                  </div>
+
+            </div>
+
+      </div>
+</section>
+<div style="text-align: center;">
+      <ngx-loading [show]="loading"
+            [config]="{ animationType: 'circle-swish', primaryColour: '#007bff', backdropBorderRadius: '4px' }"></ngx-loading>
+</div>

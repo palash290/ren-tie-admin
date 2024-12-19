@@ -1,0 +1,71 @@
+<div class="ct_middle_cnt">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="ct_my_profile_main">
+                <h2 class="mb-5 ct_h2">My Profile</h2>
+                <form [formGroup]="profileForm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-floating mb-3 ct_input">
+                                <input type="email" class="form-control" formControlName="name" id="floatingInput"
+                                    value="Mesut Arcand">
+                                <label for="floatingInput">Name</label>
+                                <div *ngIf="profileForm.controls['name'].invalid && profileForm.controls['name'].touched"
+                                    class="error-message">
+                                    <div *ngIf="profileForm.controls['name'].errors?.['required']">Please enter
+                                        your name.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-6">
+                          <button class="ct_custom_btn py-2 px-4 w-auto" data-bs-toggle="modal"
+                              data-bs-target="#ct_add_date">
+                              <i class="fa-solid fa-plus"></i> Change Time
+                          </button>
+                      </div> -->
+
+                    </div>
+
+                    <div class="form-floating mb-3 ct_input">
+                        <input type="text" class="form-control" formControlName="address" id="floatingInput"
+                            value="Mesut Arcand">
+                        <label for="floatingInput">Address</label>
+                        <div *ngIf="profileForm.controls['address'].invalid && profileForm.controls['address'].touched"
+                            class="error-message">
+                            <div *ngIf="profileForm.controls['address'].errors?.['required']">Please enter
+                                your address.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3 ct_input">
+                        <input type="text" class="form-control" formControlName="phone" id="floatingInput2"
+                            maxlength="10">
+                        <label for="floatingInput2">Phone</label>
+                        <div *ngIf="profileForm.controls['phone'].invalid && profileForm.controls['phone'].touched"
+                            class="error-message">
+                            <div *ngIf="profileForm.controls['phone'].errors?.['required']">Please enter
+                                your phone number.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3 ct_input">
+                        <input type="text" class="form-control" formControlName="admin_commission" id="floatingInput1">
+                        <label for="floatingInput1">Admin Commission</label>
+                    </div>
+
+                    <div class="form-floating mb-3 ct_input">
+                        <input type="email" class="form-control" formControlName="email" id="floatingInput3">
+                        <label for="floatingInput3">Email address</label>
+                    </div>
+
+                    <div class="text-center mt-5" (click)="onSubmit()">
+                        <a type="submit" class="ct_custom_btn" style="text-decoration: none;">Edit Profile</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="ct_middle_cnt">
+
+  <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+    <h2 class="ct_h2">Bid</h2>
+
+    <div class="">
+      <div class="d-flex align-items-center justify-content-between ct_responsive_wrap">
+
+        <div class="position-relative ct_search_input">
+          <input type="text" class="form-control ct_flex_1" placeholder="Search" [(ngModel)]="searchQuery">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <section class="mb-5">
+
+    <div class="table-responsive">
+      <table class="table ct_custom_table">
+        <thead>
+          <tr>
+            <th>S No.</th>
+            <th>Bid From</th>
+            <th>Bid To</th>
+            <th>Bid Amount(€)</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Activity</th>
+            <th>Location</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of data | filter3:searchQuery | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+            <td>{{(p - 1) * 10 + i + 1}}</td>
+            <td class="text-start">
+              <div class="ct_event_img">
+                <img [src]="row.boyImage ? row.boyImage : 'assets/img/np_pro.png'" alt="img" class="ct_img_40">
+                {{row.boySide.fullName}}
+              </div>
+            </td>
+
+            <td class="text-start">
+              <div class="ct_event_img">
+                <img [src]="row.girlImage ? row.girlImage : 'assets/img/np_pro.png'" alt="img" class="ct_img_40">
+                {{row.girlSide.fullName}}
+              </div>
+            </td>
+
+            <td>{{row.price}}</td>
+            <td>{{row.date }}</td>
+            <td>{{row.time}}</td>
+            <td>{{row.activities}}</td>
+            <td>{{cleanCityName(row.loction)}}</td>
+            <td>
+              <ng-container *ngIf="row.status == 0">
+                <span class="ct_badge ct_pending_clr">Pending</span>
+              </ng-container>
+              <ng-container *ngIf="row.status == 1"><span class="ct_badge ct_accept_clr">Accepted</span></ng-container>
+              <ng-container *ngIf="row.status == 2"><span
+                  class="ct_badge ct_rejected_clr">Rejected</span></ng-container>
+            </td>
+          </tr>
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="9">
+              <div *ngIf="(!data || (data | filter3: searchQuery)?.length === 0)" class="no-item-found">
+                <p class="text-center my-5"> No results found</p>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+        <!-- <div *ngIf="(data?.length == 0)" class="no-item-found">
+                    No results found
+                </div> -->
+      </table>
+    </div>
+    <pagination-controls class="ct_pagination_div" *ngIf="!(data?.length == 0)"
+    (pageChange)="p = $event"></pagination-controls>
+  </section>
+
+</div>

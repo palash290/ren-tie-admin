@@ -1,0 +1,807 @@
+<!-- <ul class="nav nav-tabs ct_login_custom_tab">
+    <li class="nav-item" [class.active]="activeTab === 'boy'">
+        <a class="nav-link" style="cursor: pointer;" (click)="activateTab('boy')">Boys</a>
+    </li>
+    <li class="nav-item" [class.active]="activeTab === 'girl'">
+        <a class="nav-link" style="cursor: pointer;" (click)="activateTab('girl')">Girls</a>
+    </li>
+</ul> -->
+
+<div>
+    <div class="ct_middle_cnt">
+        <section class="mb-5">
+            <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+
+                <button class="ct_custom_btn py-2 px-4 w-auto" data-bs-toggle="modal" data-bs-target="#ct_add_b">
+                    <i class="fa-solid fa-plus"></i> Add User
+                </button>
+
+                <div class="">
+                    <div class="d-flex align-items-center justify-content-between ct_responsive_wrap">
+
+                        <div class="position-relative ct_search_input">
+                            <input type="text" class="form-control ct_flex_1" placeholder="Search"
+                                [(ngModel)]="searchQuery">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table ct_custom_table">
+                    <thead>
+                        <tr>
+                            <th>S No.</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Gender</th>
+                            <th>DOB</th>
+                            <th>Address</th>
+                            <th>Membership</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let row of data | filter:searchQuery | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                            <td>{{(p - 1) * 10 + i + 1}}</td>
+                            <td>
+                                <div class="ct_event_img" (click)="showImg(row.userProfile)" class="ct_event_img"
+                                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#img">
+                                    <img [src]="row.userProfile ? row.userProfile : 'assets/img/np_pro.png'" alt="img">
+                                </div>
+                            </td>
+                            <td>{{row.fullName}}</td>
+                            <td>{{row.mobileNumber}}</td>
+                            <td>
+                                <ng-container *ngIf="row.gender == 'male'">
+                                    Male
+                                </ng-container>
+                                <ng-container *ngIf="row.gender == 'female'">
+                                    Female
+                                </ng-container>
+                                <ng-container *ngIf="row.gender == 'lesbian'">
+                                    Lesbian
+                                </ng-container>
+                                <ng-container *ngIf="row.gender == 'gay'">
+                                    Gay
+                                </ng-container>
+                                <ng-container *ngIf="row.gender == 'transgender'">
+                                    Transgender
+                                </ng-container>
+                                <ng-container *ngIf="row.gender == 'queer'">
+                                    Queer
+                                </ng-container>
+                            </td>
+                            <td>{{row.dob | customDate | date:'dd-MM-yyyy'}}</td>
+                            <td>{{row.address}}</td>
+
+                            <td> <ng-container *ngIf="row.isPremium == 'Standard'">
+                                    <span class="ct_badge ct_pending_clr">Standard</span>
+                                </ng-container>
+                                <ng-container *ngIf="row.isPremium == 'Premium'"><span
+                                        class="ct_badge ct_accept_clr">Premium</span></ng-container>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2 justify-content-end">
+                                    <button class="ct_action_btn ct_edit_btn" (click)="view(row.id)">
+                                        <i class="fa-regular fa-eye" data-bs-toggle="modal"
+                                            data-bs-target="#ct_order_view" style="cursor: pointer;" title="View"></i>
+                                    </button>
+                                    <button class="ct_action_btn ct_edit_btn" data-bs-toggle="modal"
+                                        data-bs-target="#ct_edit_b" (click)="fetchUserData(row.id)">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <button (click)="deleteField(row.id)" class="ct_action_btn ct_dlt_btn">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="9">
+                                <div *ngIf="(!data || (data | filter: searchQuery)?.length === 0)"
+                                    class="no-item-found">
+                                    <p class="text-center my-5"> No results found</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+            <pagination-controls class="ct_pagination_div" *ngIf="!(data?.length == 0)"
+                (pageChange)="p = $event"></pagination-controls>
+        </section>
+
+    </div>
+</div>
+
+<!-- <div *ngIf="activeTab === 'girl'">
+    <div class="ct_middle_cnt">
+        <section class="mb-5">
+            <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+
+                <button class="ct_custom_btn py-2 px-4 w-auto" data-bs-toggle="modal" data-bs-target="#ct_add_b">
+                    <i class="fa-solid fa-plus"></i> Add User
+                </button>
+
+                <div class="">
+                    <div class="d-flex align-items-center justify-content-between ct_responsive_wrap">
+
+                        <div class="position-relative ct_search_input">
+                            <input type="text" class="form-control ct_flex_1" placeholder="Search"
+                                [(ngModel)]="searchQuery">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table ct_custom_table">
+                    <thead>
+                        <tr>
+                            <th>S No.</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Gender</th>
+                            <th>DOB</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of data1 | filter:searchQuery; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>
+                                <div class="ct_event_img" (click)="showImg(row.userProfile)" class="ct_event_img"
+                                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#img">
+                                    <img [src]="row.userProfile ? row.userProfile : 'assets/img/np_pro.png'" alt="img">
+                                </div>
+                            </td>
+                            <td>{{row.fullName}}</td>
+                            <td>{{row.mobileNumber}}</td>
+                            <td> <ng-container *ngIf="row.gender == 'female'">
+                                    Female
+                                </ng-container></td>
+                            <td>{{row.dob | customDate | date:'dd-MM-yyyy'}}</td>
+                            <td>{{row.address}}</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2 justify-content-end">
+                                    <button class="ct_action_btn ct_edit_btn">
+                                        <i class="fa-regular fa-eye" data-bs-toggle="modal" (click)="view(row.id)"
+                                            data-bs-target="#ct_order_view" style="cursor: pointer;" title="View"></i>
+                                    </button>
+
+                                    <button class="ct_action_btn ct_edit_btn" data-bs-toggle="modal"
+                                        data-bs-target="#ct_edit_b" (click)="fetchUserData(row.id)">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <button class="ct_action_btn ct_edit_btn w-auto px-3 py-0 ct_custom_btn"
+                                        data-bs-toggle="modal" data-bs-target="#ct_edit_act"
+                                        (click)="fetchActivities(row.id)">
+                                        Activity
+                                    </button>
+
+                                  
+
+                                    <button (click)="deleteField(row.id)" class="ct_action_btn ct_dlt_btn">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+
+
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                    <div *ngIf="(!data1 || (data1 | filter: searchQuery)?.length === 0)" class="no-item-found">
+                        No results found
+                    </div>
+                </table>
+            </div>
+
+        </section>
+
+    </div>
+</div> -->
+
+<!-- Add both -->
+<div class="modal fade" id="ct_add_b" tabindex="-1" aria-labelledby="ct_add_offerLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-0 pb-5">
+                <div class="ct_event_modal">
+                    <h2 class="text-center mb-5 ct_h2">Add User</h2>
+                    <form #f="ngForm" [formGroup]="newForm">
+
+                        <div class="ct_formField mb-3">
+                            <label for="ct_event_img" class="w-100">
+                                <input type="file" id="ct_event_img" formControlName="profile_images"
+                                    (change)="onFileSelect($event, 'profile_images')" />
+                            </label>
+                        </div>
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Name</label>
+                            <input type="text" required="" formControlName="fullName" />
+
+                            <div *ngIf="newForm.controls['fullName'].invalid && newForm.controls['fullName'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls['fullName'].errors?.['required']">Name is
+                                    required.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="ct_formField mb-3">
+                            <label for="" class="mb-2 ct_fw_600">DOB</label>
+                            <input type="date" required="" formControlName="dob" [max]="maxDate" />
+
+                            <!-- <div *ngIf="newForm.controls['dob'].invalid && newForm.controls['dob'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls['dob'].errors?.['required']">DOB is
+                                    required.
+                                </div>
+                            </div> -->
+                            <div *ngIf="newForm.controls['dob'].invalid && newForm.controls['dob'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls['dob'].errors?.['required']">This field is required.</div>
+                                <div *ngIf="newForm.controls['dob'].errors?.['age']">DOB must be above 18.</div>
+                            </div>
+                        </div>
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Address</label>
+                            <input type="text" required="" formControlName="address" />
+
+                            <div *ngIf="newForm.controls['address'].invalid && newForm.controls['address'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls['address'].errors?.['required']">Address is
+                                    required.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="ct_formField mb-3">
+                            <label class="mb-2 ct_fw_600">Phone Number</label> -->
+                        <!-- <ngx-intl-tel-input [cssClass]="'form-control'"
+                                [preferredCountries]="[CountryISO.UnitedStates, CountryISO.UnitedKingdom]"
+                                [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                                [searchCountryField]="[SearchCountryField.Name, SearchCountryField.DialCode, SearchCountryField.Iso2]"
+                                [selectFirstCountry]="false" [selectedCountryISO]=CountryISO.UnitedStates
+                                [separateDialCode]="true" formControlName="mobileNumber"></ngx-intl-tel-input> -->
+
+                        <!-- <ngx-intl-tel-input 
+                                [cssClass]="'form-control'" 
+                                [preferredCountries]="['sg']" 
+                                [onlyCountries]="['my', 'us']"
+                                [enablePlaceholder]="true"
+                                [enableAutoCountrySelect]="true"
+                                formControlName="mobileNumber"></ngx-intl-tel-input> -->
+
+                        <!-- <div *ngIf="newForm.controls['mobileNumber'].invalid && newForm.controls['mobileNumber'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls?.['mobileNumber']?.errors?.['pattern']">
+                                    Phone number is not in standard pattern.
+                                </div>
+                                <div *ngIf="newForm.controls['mobileNumber'].errors?.['required']">
+                                    Phone number is required.
+                                </div>
+                            </div> -->
+                        <!-- </div> -->
+
+                        <div>
+                            <label for="countryCode" class="mb-2 ct_fw_600">Country Code</label>
+                            <select formControlName="countryCode" class="form-control" required>
+                                <option *ngFor="let country of countries" [value]="country.dialCode">
+                                    {{ country.name }} (+{{ country.dialCode }})
+                                </option>
+                            </select>
+                        </div>
+
+
+
+                        <!-- <div class="ct_formField mb-3">
+                            <label for="countryCode" class="mb-2 ct_fw_600">Country Code</label>
+                            <select formControlName="countryCode" class="form-control" required>
+                                <option *ngFor="let code of countryMobileCodes" [value]="code.code">
+                                    ({{ code.code }})
+                                </option>
+                            </select> -->
+                        <!-- <div *ngIf="newForm.controls['countryCode'].invalid && newForm.controls['countryCode'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls['countryCode'].errors?.['required']">
+                                    Country code is required.
+                                </div>
+                            </div> -->
+                        <!-- </div> -->
+
+                        <div class="ct_formField mb-3">
+                            <label for="mobileNumber" class="mb-2 ct_fw_600">Phone Number</label>
+                            <input type="text" formControlName="mobileNumber" maxlength="10" class="form-control"
+                                required />
+                            <div *ngIf="newForm.controls['mobileNumber'].invalid && newForm.controls['mobileNumber'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls?.['mobileNumber']?.errors?.['pattern']">
+                                    Phone number is not in standard pattern.
+                                </div>
+                                <div *ngIf="newForm.controls['mobileNumber'].errors?.['required']">
+                                    Phone number is required.
+                                </div>
+                            </div>
+                            <div *ngIf="newForm.controls['countryCode'].invalid && newForm.controls['countryCode'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls['countryCode'].errors?.['required']">
+                                    Country code is required.
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Phone Number</label>
+                            <input type="text" required="" formControlName="mobileNumber" maxlength="13" />
+
+                     
+                            <div *ngIf="newForm.controls['mobileNumber'].invalid && newForm.controls['mobileNumber'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls?.['mobileNumber']?.errors?.['pattern']">
+                                    Phone number is not in statndard pattern.
+                                </div>
+                                <div *ngIf="newForm.controls['mobileNumber'].errors?.['required']">Phone number is
+                                    required.</div>
+                            </div>
+
+                        </div> -->
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Bio</label>
+                            <textarea type="text" required="" formControlName="bio" maxlength="250"></textarea>
+
+                            <div *ngIf="newForm.controls['bio'].invalid && newForm.controls['bio'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls['bio'].errors?.['required']">Bio is
+                                    required.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-floating ct_input mb-3">
+                            <select class="form-select form-control" id="floatingSelect"
+                                aria-label="Floating label select example" formControlName="gender">
+                                <option value="0" disabled>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="lesbian">Lesbian</option>
+                                <option value="gay">Gay</option>
+                                <option value="transgender">Transgender</option>
+                                <option value="queer">Queer</option>
+                            </select>
+                            <label for="floatingSelect">Gender</label>
+
+                            <div *ngIf="newForm.controls['gender'].invalid && newForm.controls['gender'].touched"
+                                class="error-message">
+                                <div *ngIf="newForm.controls['gender'].errors?.['required']">Gender is
+                                    required.
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- <div class="ct_formField mb-3">
+                            <label for="ct_event_img" class="w-100">
+                                <input type="file" id="ct_event_img" required="" multiple (change)="onFileSelect($event, 'images')"/>
+                            </label>
+                        </div> -->
+
+                        <!-- <div *ngIf="newForm.value.gender == 'female'">
+                            <div class="ct_formField mb-3">
+                                <label for="" class="mb-2 ct_fw_600">Activity</label>
+                                <input type="text" formControlName="activity" />
+                            </div>
+
+                            <div class="ct_formField mb-3">
+                                <label for="" class="mb-2 ct_fw_600">Price</label>
+                                <input type="number" formControlName="price" />
+                            </div>
+                        </div> -->
+
+
+                        <button (click)="saveForm()" type="button"
+                            class="ct_custom_btn mt-5 px-4 w-auto mx-auto d-block">Add User</button>
+                        <button hidden type="button" class="btn btn-secondary" #closeModal
+                            data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit both -->
+<div class="modal fade" id="ct_edit_b" tabindex="-1" aria-labelledby="ct_edit_offerLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-0 pb-5">
+                <div class="ct_event_modal">
+                    <h2 class="text-center mb-5 ct_h2">Edit User</h2>
+                    <form [formGroup]="editForm">
+
+                        <div class="ct_formField mb-3">
+                            <label for="ct_event_img7" class="w-100">
+                                <input accept="image/*" type="file" formControlName="profile_images" id="ct_event_img7"
+                                    [ngClass]="{'d-none': user_profile_images !== null}"
+                                    (change)="handleFileInput($event)" />
+                                <div class="ct_edt_img" *ngIf="user_profile_images !== null">
+                                    <img id="blah" src="#" alt="Uploaded Image" [src]="user_profile_images">
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Name</label>
+                            <input type="text" required="" formControlName="fullName" />
+
+                            <div *ngIf="editForm.controls['fullName'].invalid && editForm.controls['fullName'].touched"
+                                class="error-message">
+                                <div *ngIf="editForm.controls['fullName'].errors?.['required']">This field is
+                                    required.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="ct_formField mb-3">
+                            <label for="" class="mb-2 ct_fw_600">DOB</label>
+                            <input type="date" required formControlName="dob" [max]="maxDate" />
+
+                            <!-- <div *ngIf="editForm.controls['dob'].invalid && editForm.controls['dob'].touched"
+                                class="error-message">
+                                <div *ngIf="editForm.controls['dob'].errors?.['required']">This field is
+                                    required.
+                                </div>
+                            </div> -->
+
+                            <div *ngIf="editForm.controls['dob'].invalid && editForm.controls['dob'].touched"
+                                class="error-message">
+                                <div *ngIf="editForm.controls['dob'].errors?.['required']">This field is required.</div>
+                                <div *ngIf="editForm.controls['dob'].errors?.['age']">DOB must be above 18.</div>
+                            </div>
+
+                        </div>
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Address</label>
+                            <input type="text" required="" formControlName="address" />
+
+                            <div *ngIf="editForm.controls['address'].invalid && editForm.controls['address'].touched"
+                                class="error-message">
+                                <div *ngIf="editForm.controls['address'].errors?.['required']">This field is
+                                    required.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Phone Number</label>
+                            <input type="text" required="" formControlName="mobileNumber" maxlength="14" />
+
+                            <div *ngIf="editForm.controls['mobileNumber'].invalid && editForm.controls['mobileNumber'].touched"
+                                class="error-message">
+                                <div *ngIf="editForm.controls?.['mobileNumber']?.errors?.['pattern']">
+                                    Phone number is not in statndard pattern.
+                                </div>
+                                <div *ngIf="editForm.controls['mobileNumber'].errors?.['required']">Phone number is
+                                    required.</div>
+                            </div>
+
+                        </div>
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Bio</label>
+                            <textarea type="text" required="" formControlName="bio" maxlength="250"></textarea>
+
+                            <div *ngIf="editForm.controls['bio'].invalid && editForm.controls['bio'].touched"
+                                class="error-message">
+                                <div *ngIf="editForm.controls['bio'].errors?.['required']">This field is
+                                    required.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-floating ct_formField ct_input mb-3">
+                            <select class="form-select form-control" id="floatingSelect"
+                                aria-label="Floating label select example" formControlName="gender">
+                                <option value="0" disabled>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="lesbian">Lesbian</option>
+                                <option value="gay">Gay</option>
+                                <option value="transgender">Transgender</option>
+                                <option value="queer">Queer</option>
+                            </select>
+                            <label for="floatingSelect">Gender</label>
+
+                            <div *ngIf="editForm.controls['gender'].invalid && editForm.controls['gender'].touched"
+                                class="error-message">
+                                <div *ngIf="editForm.controls['gender'].errors?.['required']">This field is
+                                    required.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="image-manager">
+
+                            <!-- <input type="file" (change)="onFileSelected($event)" multiple> -->
+                            <div class="ct_formField mb-3">
+                                <label for="ct_event_img" class="w-100">
+                                    <input type="file" id="ct_event_img" formControlName="images" multiple
+                                        (change)="onFileSelectEdit($event)" />
+                                </label>
+                            </div>
+
+                            <div class="image-list ct_multiple_img_flex">
+                                <div class="position-relative" *ngFor="let image of imageUrls; let i = index">
+                                    <img [src]="image" alt="Image">
+                                    <button (click)="deleteImage(image)" class="ct_multiple_img_dlt"><i
+                                            class="fa-solid fa-xmark"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- <div *ngIf="editForm.value.gender == 'female'">
+                            <div *ngFor="let activity of activities">
+                                <div class="ct_formField mb-3 d-flex">
+                                    <label for="" class="mb-2 ct_fw_600">Activity</label>
+                                    <input type="text" [(ngModel)]="activity.activity"
+                                        [ngModelOptions]="{standalone: true}" />
+
+                                    <label for="" class="mb-2 ct_fw_600">Price</label>
+                                    <input type="number" [(ngModel)]="activity.price"
+                                        [ngModelOptions]="{standalone: true}" />
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                        <button (click)="saveEditForm()" type="button"
+                            class="ct_custom_btn mt-5 px-4 w-auto mx-auto d-block">Save
+                            Changes</button>
+                        <button hidden type="button" class="btn btn-secondary" #closeModal1
+                            data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Edit act -->
+<div class="modal fade" id="ct_edit_act" tabindex="-1" aria-labelledby="ct_edit_offerLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-0 pb-5">
+                <div class="ct_event_modal">
+                    <h2 class="text-center mb-5 ct_h2">Add Activity</h2>
+                    <form [formGroup]="editForm">
+
+
+                        <div *ngFor="let activity of activities; let i = index">
+                            <div class="ct_formField mb-3 d-flex align-items-center gap-2">
+                                <div class="ct_flex_1 position-relative">
+                                    <label for="" class="mb-2 ct_fw_600">Activity</label>
+                                    <input type="text" class="form-control" [(ngModel)]="activity.activity"
+                                        [ngModelOptions]="{standalone: true}" />
+
+                                    <label for="" class="mb-2 ct_fw_600">Price</label>
+                                    <input type="number" class="form-control" [(ngModel)]="activity.price"
+                                        [ngModelOptions]="{standalone: true}" />
+                                    <!-- <span class="ct_price_tag_position">€</span> -->
+
+
+                                </div>
+
+                                <div class="d-flex align-items-center gap-2">
+                                    <button class="ct_custom_btn w-auto py-1 px-2" *ngIf="activity.new"
+                                        (click)="saveActivity(i)"><i class="fa-solid fa-floppy-disk"></i></button>
+                                    <button class="ct_custom_btn  w-auto py-1 px-2" *ngIf="!activity.new"
+                                        (click)="editActivity(i)"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="ct_custom_btn ct_delete_btn px-2 w-auto py-1"
+                                        (click)="deleteActivity(i)"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="ct_orange_text">
+                                <strong>
+                                    <button class="btndis ct_custom_btn" (click)="addCommittedRow()"><u>+ Add
+                                            Activity</u></button>
+                                </strong>
+                            </p>
+                        </div>
+
+                        <!-- <button  type="button"
+                            class="ct_custom_btn mt-5 px-4 w-auto mx-auto d-block">Save
+                            Changes</button> -->
+                        <button hidden type="button" class="btn btn-secondary" #closeModal2
+                            data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View -->
+<!-- <div class="modal fade Committed_Price" id="ct_order_view" tabindex="-1" aria-labelledby="ct_order_viewLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-0 pb-5">
+                <div class="ct_event_modal">
+                    <h2 class="text-center mb-5 ct_h2">View User</h2>
+                    <form [formGroup]="editForm">
+
+                        <div class="ct_formField mb-3">
+                            <label for="ct_event_img" class="w-100">
+                         
+                                <div class="ct_edt_img" *ngIf="user_profile_images == null">
+                                    No image found.
+                                </div>
+                                <div class="ct_edt_img" *ngIf="user_profile_images !== null">
+                                    <img id="blah" src="#" alt="Uploaded Image" [src]="user_profile_images">
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Name</label>
+                            <input type="text" formControlName="fullName" />
+                        </div>
+
+                        <div class="ct_formField mb-3">
+                            <label for="" class="mb-2 ct_fw_600">DOB</label>
+                            <input type="date" formControlName="dob" [max]="maxDate" />
+                        </div>
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Address</label>
+                            <input type="text" formControlName="address" />
+                        </div>
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Phone Number</label>
+                            <input type="text" formControlName="mobileNumber" maxlength="14" />
+                        </div>
+
+                        <div class="ct_formField mb-3 ">
+                            <label for="" class="mb-2 ct_fw_600">Bio</label>
+                            <textarea type="text" formControlName="bio" maxlength="250"></textarea>
+                        </div>
+
+                        <div class="form-floating ct_input mb-3">
+                            <select class="form-select form-control" id="floatingSelect"
+                                aria-label="Floating label select example" formControlName="gender">
+                                <option value="0" disabled>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                            <label for="floatingSelect">Gender</label>
+                        </div>
+
+
+
+
+                        <div class="image-manager">
+                
+
+                            <div class="image-list ct_multiple_img_flex">
+                                <div class="position-relative" *ngFor="let image of imageUrls; let i = index">
+                                    <img [src]="image" alt="Image">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                 
+
+                        <button type="button" class="ct_custom_btn mt-5 px-4 w-auto mx-auto d-block"
+                            data-bs-dismiss="modal">Done</button>
+                
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+
+<!-- View Act -->
+<div class="modal fade Committed_Price" id="ct_order_view_act" tabindex="-1" aria-labelledby="ct_order_viewLabel_act"
+    aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-0 pb-5">
+                <div class="ct_event_modal">
+                    <h2 class="text-center mb-5 ct_h2">View Activity</h2>
+                    <form [formGroup]="editForm">
+
+
+                        <div *ngFor="let activity of activities; let i = index">
+                            <div class="ct_formField mb-3 d-flex align-items-center gap-2">
+                                <div class="ct_flex_1">
+                                    <label for="" class="mb-2 ct_fw_600">Activity</label>
+                                    <input type="text" class="form-control" [value]="activity.activity" disabled />
+
+                                    <label for="" class="mb-2 ct_fw_600">Price</label>
+                                    <input type="number" class="form-control" [value]="activity.price" disabled />
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div *ngIf="(activities?.length == 0)" class="no-item-found">
+                            No activities found
+                        </div>
+
+
+                        <button hidden type="button" class="btn btn-secondary" #closeModal2
+                            data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Img -->
+<div class="modal fade" id="img" tabindex="-1" aria-labelledby="ct_add_eventLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <img [src]="userImg1  ? userImg1 : 'assets/img/np_pro.png'" alt="img">
+        </div>
+    </div>
+</div>

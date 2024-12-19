@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/ngx-toastr/toastr.css";
+/* @import "../node_modules/@swimlane/ngx-datatable/index.css";
+@import '../node_modules/@swimlane/ngx-datatable/themes/material.scss';
+@import '../node_modules/@swimlane/ngx-datatable/assets/icons.css'; */
+@import "../node_modules/intl-tel-input/build/css/intlTelInput.css";
+
+.ct_event_img img {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.ct_badge {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.ct_pending_clr {
+  background-color: orange;
+}
+
+.ct_accept_clr {
+  background-color: green;
+}
+
+.ct_rejected_clr {
+  background-color: red;
+}
+
+.error-message {
+  color: red;
+}
+
+
+.ct_price_tag_position {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+
+
+
+
+pagination-controls.ct_pagination_div {
+  text-align: end;
+}
+.ct_pagination_div ul.ngx-pagination {
+  margin-top: 10px;
+}
+.ct_pagination_div .ngx-pagination .current{
+  background-color: #e94057;
+}

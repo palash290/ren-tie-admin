@@ -1,0 +1,61 @@
+<div class="ct_middle_cnt">
+    <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+        <h2 class="ct_h2">Notifications</h2>
+    </div>
+    <section class="mb-5">
+       
+        <div class="table-responsive">
+            <table class="table ct_custom_table">
+                <thead>
+                    <tr>
+                        <th class="text-start">S No.</th>
+                        <th class="text-start">Sender's Name</th>
+                        <th class="text-start">Message</th>
+                        <!-- <th>Price</th>
+                        <th>Offer Price</th> -->
+                        <th class="text-start">Receiver's Name</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr *ngFor="let row of data | paginate: { itemsPerPage: 10, currentPage: p }; let i = index "> -->
+                        <tr *ngFor="let row of data; let i = index ">
+                        <td class="text-start">{{ (p - 1) * 10 + i + 1 }}</td>
+                        <td class="text-start">
+                            <div class="ct_event_img">
+                                <img [src]="row.sender_profile ? row.sender_profile : 'assets/img/np_pro.png'" alt="img">
+                                <p class="text-center mb-0">{{row.sender_name}}</p>
+                            </div>
+                        </td>
+                        <td class="text-start">{{row.body}}</td>
+                        <!-- <td>{{row.mobileNumber}}</td>
+                        <td>{{row.gender}}</td> -->
+                        <td class="text-start">
+                            <div class="ct_event_img">
+                                <img [src]="row.reciver_profile ? row.reciver_profile : 'assets/img/np_pro.png'" alt="img">
+                                <p class="text-center mb-0">{{row.reciver_name}}</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- <pagination-controls *ngIf="!(data?.length == 0)" (pageChange)="p = $event"></pagination-controls> -->
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                      <td colspan="6">
+                        <div *ngIf="(data?.length == 0)" class="no-item-found">
+                          <p class="text-center my-5"> No results found</p>
+                       </div>
+                      </td>
+                    </tr>
+                  </tfoot>
+                <!-- <div *ngIf="(data?.length == 0)" class="no-item-found">
+                    No results found
+                </div> -->
+            </table>
+            
+        </div>
+
+    </section>
+
+</div>
